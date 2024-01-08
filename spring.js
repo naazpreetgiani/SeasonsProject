@@ -17,7 +17,7 @@ for (let n = 1; n <=10; n++) {
 window.addEventListener("load", draw)
 
 function draw() {
-    ctx.fillStyle = "green";
+    ctx.fillStyle = "rgb(148, 210, 238)";
     ctx.fillRect(0, 0, cnv.width, cnv.height);
 
    for (let i = 0; i < snowflakes.length; i++) {
@@ -43,7 +43,6 @@ function moveFlake(aFlake) {
         aFlake.x = randomInt(1, 800);
     }
 }
-
 
 function randomSnowflake() {
    return {
