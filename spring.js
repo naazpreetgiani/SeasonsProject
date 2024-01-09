@@ -9,6 +9,13 @@ cnv.height = 600;
 let upPressed = false;
 let downPressed = false;
 
+// IMG STUFF
+let cloudImg = document.getElementById("cloud");
+
+// Draw Clouds
+ctx.drawImage(cloudImg, cloud1x, cloud1y); // Cloud 1
+ctx.drawImage(cloudImg, cloud2x, cloud2y); // Cloud 2
+
 let snowflakes = [];
 for (let n = 1; n <=10; n++) {
     snowflakes.push(randomSnowflake());
@@ -29,10 +36,7 @@ function draw() {
 }
 
 function drawFlake(aFlake) {
- ctx.fillStyle = "white";
- ctx.beginPath();
- ctx.arc(aFlake.x, aFlake.y, aFlake.r, 0, 2 * Math.PI)
- ctx.fill();
+
 }
 
 function moveFlake(aFlake) {
@@ -52,6 +56,8 @@ function randomSnowflake() {
         s: randomInt(1, 4)
     }
 }
+
+function 
 
 // Event Listeners & Handlers
 document.addEventListener("keydown", keydownHandler);

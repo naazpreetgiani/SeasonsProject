@@ -20,6 +20,11 @@ function draw() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, cnv.width, cnv.height);
 
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.arc(400, 900, 450, 0, 2 * Math.PI);
+    ctx.fill();
+
    for (let i = 0; i < snowflakes.length; i++) {
        moveFlake(snowflakes[i]);
        drawFlake(snowflakes[i]);
