@@ -1,4 +1,4 @@
-// Make It Snow
+// Make It Flower
 
 // Canvas Setup
 let cnv = document.getElementById("summerCanvas");
@@ -9,48 +9,47 @@ cnv.height = 600;
 let upPressed = false;
 let downPressed = false;
 
-let snowflakes = [];
+// IMG STUFF
+let FlowerImg = document.getElementById("flower");
+
+let flowers = [];
 for (let n = 1; n <=10; n++) {
-    snowflakes.push(randomSnowflake());
+    flowers.push(randomflower());
 }
 
 window.addEventListener("load", draw)
 
 function draw() {
-    ctx.fillStyle = 'rgb(0, 265, 265)';
+    ctx.fillStyle = "rgb(148, 210, 238)";
     ctx.fillRect(0, 0, cnv.width, cnv.height);
 
-   for (let i = 0; i < snowflakes.length; i++) {
-       moveFlake(snowflakes[i]);
-       drawFlake(snowflakes[i]);
+   for (let i = 0; i < flowers.length; i++) {
+       moveFlower(flowers[i]);
+       drawFlower(flowers[i]);
     }
   
- requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
 }
 
-function drawFlake(aFlake) {
- ctx.fillStyle = "white";
- ctx.beginPath();
- ctx.arc(aFlake.x, aFlake.y, aFlake.r, 0, 2 * Math.PI)
- ctx.fill();
+function drawFlower(aFlower) {
+    ctx.drawImage(FlowerImg, aFlower.x, aFlower.y, aFlower.w, aFlower.w); 
 }
 
-function moveFlake(aFlake) {
-    aFlake.y += aFlake.s;
+function moveFlower(aFlower) {
+    aFlower.y += aFlower.s;
 
-    if (aFlake.y > 600) {
-        aFlake.y = 0;
-        aFlake.x = randomInt(1, 800);
+    if (aFlower.y > 600) {
+        aFlower.y = 0;
+        aFlower.x = randomInt(1, 800);
     }
 }
 
-
-function randomSnowflake() {
+function randomflower() {
    return {
         x: randomInt(0, cnv.width),
         y: randomInt(0, cnv.height),
-        r: randomInt(1, 3),
-        s: randomInt(1, 4)
+        w: randomInt(20, 30),
+        s: randomInt(2, 5)
     }
 }
 
@@ -67,11 +66,11 @@ function keydownHandler(e) {
     }
 
     if (upPressed) {
-        snowflakes.push(randomSnowflake());
-        console.log(snowflakes);
+        flowers.push(randomflower());
+        console.log(flowers);
     } else if (downPressed) {
-        snowflakes.pop();
-        console.log(snowflakes);
+        flowers.pop();
+        console.log(flowers);
     } 
 }
 
