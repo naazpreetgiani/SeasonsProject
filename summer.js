@@ -66,7 +66,7 @@ function randomflower() {
         w: randomInt(20, 30),
         xs: randomInt(2, 5),
         ys: randomInt(2, 7),
-        yp: y + randomInt(2, 4)
+        yp: randomInt(2, 4)
     }
 }
 
