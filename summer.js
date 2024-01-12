@@ -11,6 +11,7 @@ let downPressed = false;
 
 // IMG STUFF
 let FlowerImg = document.getElementById("flower");
+let GrassImg = document.getElementById("grass");
 
 let flowers = [];
 for (let n = 1; n <=10; n++) {
@@ -22,6 +23,13 @@ window.addEventListener("load", draw)
 function draw() {
     ctx.fillStyle = "rgb(148, 210, 238)";
     ctx.fillRect(0, 0, cnv.width, cnv.height);
+
+    ctx.drawImage(GrassImg, 0, 550);
+
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.arc(400, 1000, 575, 0, 2 * Math.PI);
+    ctx.fill();
 
    for (let i = 0; i < flowers.length; i++) {
        moveFlower(flowers[i]);
@@ -36,20 +44,29 @@ function drawFlower(aFlower) {
 }
 
 function moveFlower(aFlower) {
-    aFlower.y += aFlower.s;
+    aFlower.x += aFlower.xs;
+    aFlower.y -= aFlower.ys;
+    if (aFlower.y = yp) {
+        aFlower.y += aFlower.ys; 
+    } else if (aFlower.y < yp) {
+        aFlower.y -+ aFlower.ys;
+    }
+    
 
-    if (aFlower.y > 600) {
-        aFlower.y = 0;
-        aFlower.x = randomInt(1, 800);
+    if (aFlower.x > 800) {
+        aFlower.x = 0;
+        aFlower.y = randomInt(400, cnv.height);
     }
 }
 
 function randomflower() {
    return {
         x: randomInt(0, cnv.width),
-        y: randomInt(0, cnv.height),
+        y: randomInt(400, cnv.height),
         w: randomInt(20, 30),
-        s: randomInt(2, 5)
+        xs: randomInt(2, 5),
+        ys: randomInt(2, 7),
+        yp: y + randomInt(2, 4)
     }
 }
 

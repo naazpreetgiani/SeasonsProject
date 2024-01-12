@@ -9,50 +9,57 @@ cnv.height = 600;
 let upPressed = false;
 let downPressed = false;
 
-let snowflakes = [];
+// Image Stuff
+let leafImg = document.getElementById("leaf");
+let leafpileImg = document.getElementById("leafpile");
+
+let leaves = [];
 for (let n = 1; n <=10; n++) {
-    snowflakes.push(randomSnowflake());
+    leaves.push(randomleaf());
 }
 
 window.addEventListener("load", draw)
 
 function draw() {
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "rgb(145, 200, 230)";
     ctx.fillRect(0, 0, cnv.width, cnv.height);
 
-   for (let i = 0; i < snowflakes.length; i++) {
-       moveFlake(snowflakes[i]);
-       drawFlake(snowflakes[i]);
+    ctx.fillStyle = "orange";
+    ctx.beginPath();
+    ctx.arc(400, 1000, 575, 0, 2 * Math.PI);
+    ctx.fill(); 
+
+    ctx.drawImage(leafpileImg, 500, 400, 200, 200); 
+
+   for (let i = 0; i < leaves.length; i++) {
+       moveLeaf(leaves[i]);
+       drawLeaf(leaves[i]);
     }
   
  requestAnimationFrame(draw);
 }
 
-function drawFlake(aFlake) {
- ctx.fillStyle = "white";
- ctx.beginPath();
- ctx.arc(aFlake.x, aFlake.y, aFlake.r, 0, 2 * Math.PI)
- ctx.fill();
+function drawLeaf(aLeaf) {
+    ctx.drawImage(leafImg, aLeaf.x, aLeaf.y, aLeaf.w, aLeaf.w); 
 }
 
-function moveFlake(aFlake) {
-    aFlake.y += aFlake.s;
+function moveLeaf(aLeaf) {
+    aLeaf.y += aLeaf.s;
 
-    if (aFlake.y > 600) {
-        aFlake.y = 0;
-        aFlake.x = randomInt(1, 800);
+    if (aLeaf.y > 600) {
+        aLeaf.y = 0;
+        aLeaf.x = randomInt(1, 800);
     }
 }
 
-
-function randomSnowflake() {
-   return {
+function randomleaf() {
+    return {
         x: randomInt(0, cnv.width),
         y: randomInt(0, cnv.height),
-        r: randomInt(1, 3),
-        s: randomInt(1, 4)
+        w: randomInt(20, 30),
+        s: randomInt(2, 5)
     }
-}
+ }
 
 // Event Listeners & Handlers
 document.addEventListener("keydown", keydownHandler);
@@ -67,11 +74,11 @@ function keydownHandler(e) {
     }
 
     if (upPressed) {
-        snowflakes.push(randomSnowflake());
-        console.log(snowflakes);
+        leaves.push(randomleaf());
+        console.log(leaves);
     } else if (downPressed) {
-        snowflakes.pop();
-        console.log(snowflakes);
+        leaves.pop();
+        console.log(leaves);
     } 
 }
 

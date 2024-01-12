@@ -9,6 +9,8 @@ cnv.height = 600;
 let upPressed = false;
 let downPressed = false;
 
+let olafImg = document.getElementById("winterolaf");
+
 let snowflakes = [];
 for (let n = 1; n <=10; n++) {
     snowflakes.push(randomSnowflake());
@@ -20,10 +22,12 @@ function draw() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, cnv.width, cnv.height);
 
-    ctx.fillStyle = "white";
+   ctx.fillStyle = "white";
     ctx.beginPath();
-    ctx.arc(400, 900, 450, 0, 2 * Math.PI);
-    ctx.fill();
+    ctx.arc(400, 1000, 575, 0, 2 * Math.PI);
+    ctx.fill(); 
+
+    ctx.drawImage(olafImg, 100, 300, 300, 300);
 
    for (let i = 0; i < snowflakes.length; i++) {
        moveFlake(snowflakes[i]);
@@ -48,7 +52,6 @@ function moveFlake(aFlake) {
         aFlake.x = randomInt(1, 800);
     }
 }
-
 
 function randomSnowflake() {
    return {

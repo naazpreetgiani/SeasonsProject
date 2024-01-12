@@ -39,7 +39,7 @@ function draw() {
 
     ctx.fillStyle = "green";
     ctx.beginPath();
-    ctx.arc(400, 1000, 580, 0, 2 * Math.PI);
+    ctx.arc(400, 1000, 575, 0, 2 * Math.PI);
     ctx.fill();
 
     ctx.drawImage(cloudImg, cloud1x, cloud1y);
