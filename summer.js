@@ -109,6 +109,16 @@ function keydownHandler(e) {
         background.g--;
         background.b--;
     }
+
+    if (background.r >= 188 && background.g >= 250 && background.b >= 278) {
+        background.r = 188;
+        background.g = 250;
+        background.b = 278;
+    } else if (background.r <= 60 && background.g <= 122 && background.b <= 150) {
+        background.r = 60;
+        background.g = 122;
+        background.b = 150;
+    }
 }
 
 function keyupHandler(e) {
