@@ -9,6 +9,8 @@ cnv.height = 600;
 // Global Variables
 let upPressed = false;
 let downPressed = false;
+let bright = false;
+let dark = false;
 let cloud1x = -75;
 let cloud1y = -75;
 let cloud2x = 0;
@@ -31,10 +33,16 @@ for (let n = 1; n <=10; n++) {
     raindrops.push(randomRaindrop());
 }
 
+let background = {
+    r: 43,
+    g: 176,
+    b: 248
+}
+
 window.addEventListener("load", draw)
 
 function draw() {
-    ctx.fillStyle = "rgb(43, 176, 248)";
+    ctx.fillStyle = `rgb(${background.r}, ${background.g}, ${background.b})`;
     ctx.fillRect(0, 0, cnv.width, cnv.height);
 
     ctx.fillStyle = "green";
@@ -98,6 +106,23 @@ function keydownHandler(e) {
         raindrops.pop();
         console.log(raindrops);
     } 
+
+    // Check for brightness
+    if (e.code === "ArrowLeft") {
+        bright = true;
+    } else if (e.code === "ArrowRight") {
+        dark = true;
+    }
+
+    if (bright) {
+        background.r++;
+        background.g++;
+        background.b++;
+    } else if (dark) {
+        background.r--;
+        background.g--;
+        background.b--;
+    }
 }
 
 function keyupHandler(e) {
@@ -106,5 +131,11 @@ function keyupHandler(e) {
         upPressed = false;
     } else if (e.code === "ArrowDown") {
         downPressed = false;
+    }
+
+    if (e.code === "ArrowLeft") {
+        bright = false;
+    } else if (e.code === "ArrowRight") {
+        dark = false;
     }
 }

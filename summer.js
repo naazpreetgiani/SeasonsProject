@@ -8,6 +8,8 @@ cnv.height = 600;
 
 let upPressed = false;
 let downPressed = false;
+let bright = false;
+let dark = false;
 
 // IMG STUFF
 let FlowerImg = document.getElementById("flower");
@@ -18,18 +20,19 @@ for (let n = 1; n <=10; n++) {
     flowers.push(randomflower());
 }
 
+let background = {
+    r: 148,
+    g: 210,
+    b: 238
+}
+
 window.addEventListener("load", draw)
 
 function draw() {
-    ctx.fillStyle = "rgb(148, 210, 238)";
+    ctx.fillStyle = `rgb(${background.r}, ${background.g}, ${background.b})`;
     ctx.fillRect(0, 0, cnv.width, cnv.height);
 
-    ctx.drawImage(GrassImg, 0, 550);
-
-    ctx.fillStyle = "green";
-    ctx.beginPath();
-    ctx.arc(400, 1000, 575, 0, 2 * Math.PI);
-    ctx.fill();
+    ctx.drawImage(GrassImg, 0, 250, cnv.width, cnv.height);
 
    for (let i = 0; i < flowers.length; i++) {
        moveFlower(flowers[i]);
@@ -45,27 +48,27 @@ function drawFlower(aFlower) {
 
 function moveFlower(aFlower) {
     aFlower.x += aFlower.xs;
-    aFlower.y -= aFlower.ys;
-    if (aFlower.y = yp) {
-        aFlower.y += aFlower.ys; 
-    } else if (aFlower.y < yp) {
-        aFlower.y -+ aFlower.ys;
-    }
+    // aFlower.y -= aFlower.ys;
+    // if (aFlower.y < aFlower.y - aFlower.yp) {
+    //     aFlower.y -= aFlower.ys; 
+    // } else if (aFlower.y > aFlower.y + aFlower.yp) {
+    //     aFlower.y += aFlower.ys;
+    // }
     
 
     if (aFlower.x > 800) {
         aFlower.x = 0;
-        aFlower.y = randomInt(400, cnv.height);
+        aFlower.y = randomInt(450, cnv.height);
     }
 }
 
 function randomflower() {
    return {
         x: randomInt(0, cnv.width),
-        y: randomInt(400, cnv.height),
+        y: randomInt(450, cnv.height),
         w: randomInt(20, 30),
         xs: randomInt(2, 5),
-        ys: randomInt(2, 7),
+        ys: randomInt(2, 4),
         yp: randomInt(2, 4)
     }
 }
@@ -89,6 +92,23 @@ function keydownHandler(e) {
         flowers.pop();
         console.log(flowers);
     } 
+
+    // Check for brightness
+    if (e.code === "ArrowLeft") {
+        bright = true;
+    } else if (e.code === "ArrowRight") {
+            dark = true;
+    }
+        
+    if (bright) {
+        background.r++;
+        background.g++;
+        background.b++;
+    } else if (dark) {
+        background.r--;
+        background.g--;
+        background.b--;
+    }
 }
 
 function keyupHandler(e) {
@@ -97,5 +117,11 @@ function keyupHandler(e) {
         upPressed = false;
     } else if (e.code === "ArrowDown") {
         downPressed = false;
+    }
+
+    if (e.code === "ArrowLeft") {
+        bright = false;
+    } else if (e.code === "ArrowRight") {
+        dark = false;
     }
 }

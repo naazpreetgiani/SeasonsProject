@@ -8,6 +8,8 @@ cnv.height = 600;
 
 let upPressed = false;
 let downPressed = false;
+let bright = false;
+let dark = false;
 
 // Image Stuff
 let leafImg = document.getElementById("leaf");
@@ -18,10 +20,16 @@ for (let n = 1; n <=10; n++) {
     leaves.push(randomleaf());
 }
 
+let background = {
+    r: 145,
+    g: 200,
+    b: 230
+}
+
 window.addEventListener("load", draw)
 
 function draw() {
-    ctx.fillStyle = "rgb(145, 200, 230)";
+    ctx.fillStyle = `rgb(${background.r}, ${background.g}, ${background.b})`;
     ctx.fillRect(0, 0, cnv.width, cnv.height);
 
     ctx.fillStyle = "orange";
@@ -80,6 +88,23 @@ function keydownHandler(e) {
         leaves.pop();
         console.log(leaves);
     } 
+
+    // Check for brightness
+    if (e.code === "ArrowLeft") {
+        bright = true;
+    } else if (e.code === "ArrowRight") {
+        dark = true;
+    }
+
+    if (bright) {
+        background.r++;
+        background.g++;
+        background.b++;
+    } else if (dark) {
+        background.r--;
+        background.g--;
+        background.b--;
+    }
 }
 
 function keyupHandler(e) {
@@ -88,5 +113,11 @@ function keyupHandler(e) {
         upPressed = false;
     } else if (e.code === "ArrowDown") {
         downPressed = false;
+    }
+
+    if (e.code === "ArrowLeft") {
+        bright = false;
+    } else if (e.code === "ArrowRight") {
+        dark = false;
     }
 }
